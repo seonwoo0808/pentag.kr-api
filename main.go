@@ -63,6 +63,7 @@ func main() {
 		
 
 		if err != nil {
+			log.Println(err)
 			return c.Status(500).JSON(fiber.Map{
 				"error": "Cannot save contact",
 			})
@@ -70,6 +71,7 @@ func main() {
 
 		err = contactReq.SendVerifyEmail(contactObj.VerifyCode)
 		if err != nil {
+			log.Println(err)
 			return c.Status(500).JSON(fiber.Map{
 				"error": "Cannot send email",
 			})

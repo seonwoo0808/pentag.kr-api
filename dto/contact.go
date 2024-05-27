@@ -33,8 +33,8 @@ func (c *ContactReq) Validate() error {
 	if c.Phone == "" || len(c.Phone) > 30 {
 		return errors.New("phone cannot be empty or more than 30 characters")
 	}
-	if c.Category < 1 || c.Category > 3 {
-		return errors.New("category must be between 1 and 3")
+	if c.Category < 0 || c.Category > 2 {
+		return errors.New("category must be between 0 and 2")
 	}
 	if c.Message == "" || len(c.Message) > 5000 {
 
