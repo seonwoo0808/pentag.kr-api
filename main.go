@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"pentag.kr/api-server/configs"
 	"pentag.kr/api-server/database"
 	"pentag.kr/api-server/dto"
@@ -15,9 +16,16 @@ import (
 
 func main() {
 	configs.LoadAllEnv()
-	database.NewDBClient()
+	database.NewDBClient()	
 
     app := fiber.New()
+
+	// CORS
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "https://pentag.kr",
+		AllowHeaders: "*",
+		AllowMethods: "*",
+	}))
 
     app.Post("/contact", func (c *fiber.Ctx) error {
 		var contactReq dto.ContactReq
