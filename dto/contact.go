@@ -91,9 +91,9 @@ func (c *ContactReq) ReplaceSymbol() {
 	c.Message = replace(c.Message)
 }
 
-func (c *ContactReq) SendVerifyEmail(verifyCode string) error {
+func (c *ContactReq) SendVerifyEmail(originalEmail string, verifyCode string) error {
 	body := fmt.Sprintf(VERIFT_EMAIL_TEMPLATE, verifyCode, c.FirstName, c.LastName, c.Email, c.Phone, c.CategoryToString(), c.Message)
-	return utils.SendEmail(configs.Env.SMTPUser, []string{c.Email}, "pentag.kr 문의를 위한 이메일 인증", body)
+	return utils.SendEmail(configs.Env.SMTPUser, []string{originalEmail}, "pentag.kr 문의를 위한 이메일 인증", body)
 }
 
 const VERIFT_EMAIL_TEMPLATE = `

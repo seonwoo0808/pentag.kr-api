@@ -48,6 +48,8 @@ func main() {
 			})
 		}
 
+		originalEmail := contactReq.Email
+
 		contactReq.ReplaceSymbol()
 
 		dbClient := database.GetDBClient()
@@ -69,7 +71,7 @@ func main() {
 			})
 		}
 
-		err = contactReq.SendVerifyEmail(contactObj.VerifyCode)
+		err = contactReq.SendVerifyEmail(originalEmail, contactObj.VerifyCode)
 		if err != nil {
 			log.Println(err)
 			return c.Status(500).JSON(fiber.Map{
