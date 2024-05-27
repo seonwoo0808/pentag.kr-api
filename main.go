@@ -19,7 +19,7 @@ func main() {
 
     app := fiber.New()
 
-    app.Get("/contact", func (c *fiber.Ctx) error {
+    app.Post("/contact", func (c *fiber.Ctx) error {
 		var contactReq dto.ContactReq
 
 		if err := c.BodyParser(&contactReq); err != nil {
